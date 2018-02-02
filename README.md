@@ -103,7 +103,7 @@ import FastImage from 'react-native-uking-fast-image';
 
 <FastImage 
     src="url" 
-    placeholder="占位图片"
+    placeholder="占位图片" //占位图片 ios请添加占位图片到项目的资源管理里面，android请添加到你项目的drawable里，占位图片名称最好统一
     resizeMode="填充方式"
 />
 ```
