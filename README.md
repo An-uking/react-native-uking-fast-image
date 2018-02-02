@@ -1,21 +1,19 @@
-# react-native-uking-qrcode 
+# react-native-uking-fast-image
 
-[![npm package](https://badge.fury.io/js/react-native-uking-qrcode.svg)](https://www.npmjs.com/package/react-native-uking-qrcode)
-[![npm download](https://img.shields.io/npm/dm/react-native-uking-qrcode.svg?style=flat-square)](https://www.npmjs.com/package/react-native-uking-qrcode)
+[![npm package](https://badge.fury.io/js/react-native-uking-fast-image.svg)](https://www.npmjs.com/package/react-native-uking-fast-image)
+[![npm download](https://img.shields.io/npm/dm/react-native-uking-fast-image.svg?style=flat-square)](https://www.npmjs.com/package/react-native-uking-fast-image)
 
 ##Introduction
 
-原生二维码（QRCode）和条码(BarCode)生成组件及二维码扫描(QRScaner)组件，，集成到 iOS 和 Android 。
+原生图片加载组件，，集成到 iOS 和 Android 。
 
-二维码和条码生成组件和二维码扫描组(开发中)是基于 
+原生图片加载组件是基于 
 
-SGQRCode(IOS) GIT: https://github.com/kingsic/SGQRCode.git
+SDWebImage(IOS) GIT: https://github.com/rs/SDWebImage.git
 
-BGAQRCode-Android(android) GIT: https://github.com/bingoogolapple/BGAQRCode-Android.git
+Glide(android) GIT: https://github.com/bumptech/glide.git
 
 ##注：
-
-IOS 版已将ZXingObjc 更新到最新
 
 如果有不对的地方请提交到issues以便解决。
 
@@ -23,7 +21,7 @@ IOS 版已将ZXingObjc 更新到最新
 
 ###npm or yarn 
 
-npm install react-native-uking-qrcode  or yarn add react-native-uking-qrcode
+npm install react-native-uking-fast-image  or yarn add react-native-uking-fast-image
 
 ##BarCode
 
@@ -44,24 +42,17 @@ npm install react-native-uking-qrcode  or yarn add react-native-uking-qrcode
     platform :ios, '8.0'
     target '你的项目名称' do
         pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'    
-        pod 'React', path: '../node_modules/react-native/'    
-        pod 'RCTQRCode', path: '../node_modules/react-native-uking-qrcode/ios/'   
+        pod 'React', :path => '../node_modules/react-native', :subspecs => [
+            'Core',
+            'DevSupport'
+        ]
+        pod 'RCTFastImageView', path: '../node_modules/react-native-uking-fast-image/ios/'
     end
 ```
 然后在ios目录下 执行 pod install
 然后把ios/Pods录下 Pods.xcodeproj添加到 Libraries下
 
-3. 如果是 iOS 10 需要在 info 中额外添加如下权限:
-```
-    <key>NSCameraUsageDescription</key>    
-    <string>cameraDesciption</string>
-
-    <key>NSContactsUsageDescription</key>    
-    <string>contactsDesciption</string>
-
-    <key>NSMicrophoneUsageDescription</key>    
-    <string>microphoneDesciption</string>
-```    
+3. 如果是 iOS 中请求图片为http请求,请在Info.plist中添加http请求权限: 
 
 
 #### Android
@@ -71,16 +62,16 @@ make the following additions to the given files manually:
 **android/settings.gradle**
 
 ```gradle
-include ':react-native-uking-qrcode'
-project(':react-native-uking-qrcode').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-uking-qrcode/android')
+include ':react-native-uking-fast-image'
+project(':react-native-uking-fast-image').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-uking-fast-image/android')
 ```
 
 **android/app/build.gradle**
 
 ```gradle
 dependencies {
-   ...
-   compile project(':react-native-uking-qrcode')
+    ...
+    compile project(':react-native-uking-fast-image')
 }
 ```
 
@@ -89,17 +80,17 @@ dependencies {
 On top, where imports are:
 
 ```java
-import net.muding.uking.qrcode.RCTQRCodePackage;
+import net.muding.uking.rctfastimageview.RCTFastImageViewPackage;
 ```
 
-Add the `RCTQRCodePackage` class to your list of exported packages.
+Add the `RCTFastImageViewPackage` class to your list of exported packages.
 
 ```java
 @Override
 protected List<ReactPackage> getPackages() {
     return Arrays.asList(
             new MainReactPackage(),
-            new RCTQRCodePackage()
+            new RCTFastImageViewPackage()
     );
 }
 ```
@@ -107,51 +98,12 @@ protected List<ReactPackage> getPackages() {
 
 ##Usage
 
-###1. 二维码 QRCode
-
 ```javascript
-import {QRCode} from 'react-native-uking-qrcode';
+import FastImage from 'react-native-uking-fast-image';
 
-<QRCode 
-    style={{width:150,height:150}} 
-    forecolor="#FF6621" 
-    backcolor="#256DDD" 
-    text={'by uking'} 
-    logo='path' //logo local path 本地路径
-    size={150} 
+<FastImage 
+    src="url" 
+    placeholder="占位图片"
+    resizeMode="填充方式"
 />
 ```
-###2. 条码 BarCode
-
-```javascript
-import {BarCode} from 'react-native-uking-qrcode';
-
-<BarCode
-    style={{width:300,height:100}}                    
-    text='6923450657713'
-    format='EAN_13'
-    width={300}
-    height={100}
-/>
-```
-条码类型 format :
-```
-CODABAR
-CODE_39
-CODE_93
-CODE_128
-DATA_MATRIX
-EAN_8
-EAN_13
-ITF
-MAXICODE
-PDF_417
-QR_CODE
-RSS_14
-RSS_EXPANDED
-UPC_A
-UPC_E
-UPC_EAN_EXTENSION
-
-```
-###3. 二维码扫描  QRScanner 开发中
