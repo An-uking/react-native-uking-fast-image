@@ -23,17 +23,9 @@ Glide(android) GIT: https://github.com/bumptech/glide.git
 
 npm install react-native-uking-fast-image  or yarn add react-native-uking-fast-image
 
-##BarCode
+##FastImage
 
 ![image](https://github.com/An-uking/react-native-uking-qrcode/blob/master/screenshots/2.jpg)
-
-##QRCode
-
-![image](https://github.com/An-uking/react-native-uking-qrcode/blob/master/screenshots/3.jpg)
-
-![image](https://github.com/An-uking/react-native-uking-qrcode/blob/master/screenshots/4.jpg)
-
-![image](https://github.com/An-uking/react-native-uking-qrcode/blob/master/screenshots/1.jpg)
 
 ###IOS:
 
